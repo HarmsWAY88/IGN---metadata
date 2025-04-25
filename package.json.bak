@@ -1,0 +1,15 @@
+{
+  "name": "fitcoin-metadata",
+  "version": "1.0.0",
+  "main": "create-metadata.js",
+  "scripts": {
+    "start": "node create-metadata.js"
+  },
+  "dependencies": {
+    "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
+    "@solana/spl-token": "^0.4.8",
+    "@solana/spl-token-metadata": "^0.1.6",
+    "@solana/web3.js": "^1.98.0",
+    "ls": "^0.2.1"
+  }
+}
