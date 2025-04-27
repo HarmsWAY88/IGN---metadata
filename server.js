@@ -1,7 +1,7 @@
 import express from 'express';
 import pkgWeb3 from '@solana/web3.js';
 import pkgToken from '@solana/spl-token';
-import { readFileSync } from 'fs';
+
 
 const { Connection, Keypair, PublicKey, SystemProgram, Transaction, sendAndConfirmTransaction } = pkgWeb3;
 const { TOKEN_PROGRAM_ID, Token } = pkgToken;
@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 
 const connection = new Connection('https://api.devnet.solana.com', 'confirmed');
-const adminKeypair = Keypair.fromSecretKey(Uint8Array.from(JSON.parse(readFileSync('C:/Users/Travi/.config/solana/id.json'))));
+const adminKeypair = Keypair.fromSecretKey(Uint8Array.from(JSON.parse(process.env.ADMIN_KEYPAIR)));
 const tokenMint = new PublicKey('59PQyCUhDfsyschntZo7XnBxFujC46jcEtHCR59aFpPw');
 const TOKEN_DECIMALS = 9; // IgniteToken has 9 decimals
 
@@ -129,6 +129,7 @@ app.post('/distribute', async (req, res) => {
     }
 });
 
-app.listen(3001, '127.0.0.1', () => {
-    console.log('Server running on port 3001');
+const port = process.env.PORT || 3001;
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });
